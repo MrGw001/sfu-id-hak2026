@@ -7,7 +7,7 @@ WORKDIR /app
 
 # Install dependencies
 COPY package.json ./
-RUN npm install --legacy-peer-deps
+RUN npm install --legacy-peer-deps --no-audit --no-fund --prefer-offline
 
 # Copy application sources
 COPY . .

@@ -98,7 +98,7 @@ docker build --no-cache -t sfu-portal .
 FROM node:20-alpine AS build
 WORKDIR /app
 COPY package.json ./
-RUN npm install --legacy-peer-deps
+RUN npm install --legacy-peer-deps --no-audit --no-fund --prefer-offline
 COPY . .
 RUN npm run build
 
