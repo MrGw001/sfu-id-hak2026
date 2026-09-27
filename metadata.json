@@ -1,0 +1,6 @@
+{
+  "name": "СФУ.ID — Единый портал студента СФУ",
+  "description": "Единая платформа цифровых сервисов Сибирского федерального университета: расписание, электронные курсы e.sfu, запись на спорт, заказ справок и push-уведомления.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
