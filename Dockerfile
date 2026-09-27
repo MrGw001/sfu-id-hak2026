@@ -1,13 +1,13 @@
 # -------------------------------------------------------------
 # Stage 1: Build Frontend
 # -------------------------------------------------------------
-FROM node:20-alpine AS build
+FROM node:20-slim AS build
 
 WORKDIR /app
 
-# Install dependencies
-COPY package.json ./
-RUN npm install --legacy-peer-deps --no-audit --no-fund --prefer-offline
+# Install dependencies with lockfile (fast and reliable)
+COPY package*.json ./
+RUN npm ci --legacy-peer-deps --no-audit --no-fund || npm install --legacy-peer-deps --no-audit --no-fund
 
 # Copy application sources
 COPY . .

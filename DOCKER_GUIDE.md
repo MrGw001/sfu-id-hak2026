@@ -95,10 +95,10 @@ docker build --no-cache -t sfu-portal .
 
 ```dockerfile
 # Этап 1: Сборка фронтенда
-FROM node:20-alpine AS build
+FROM node:20-slim AS build
 WORKDIR /app
-COPY package.json ./
-RUN npm install --legacy-peer-deps --no-audit --no-fund --prefer-offline
+COPY package*.json ./
+RUN npm ci --legacy-peer-deps --no-audit --no-fund || npm install --legacy-peer-deps --no-audit --no-fund
 COPY . .
 RUN npm run build
 
