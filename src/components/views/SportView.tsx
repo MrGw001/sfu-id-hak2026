@@ -46,7 +46,7 @@ export const SportView: React.FC<SportViewProps> = ({ currentUser }) => {
           </div>
 
           <div className="border border-gray-200 bg-gray-50 px-3.5 py-1.5 text-xs text-gray-700">
-            Посещений в семестре: <strong className="text-[#EB4F26] text-sm">0 посещений</strong>
+            Посещений в семестре: <strong className="text-[#F15A24] text-sm">0 посещений</strong>
           </div>
         </div>
 
@@ -61,7 +61,7 @@ export const SportView: React.FC<SportViewProps> = ({ currentUser }) => {
       {/* Фильтр по категориям Юспорт */}
       <div className="bg-white border border-gray-200 p-3">
         <div className="text-xs font-semibold text-gray-700 mb-2 flex items-center gap-1.5">
-          <Filter className="w-3.5 h-3.5 text-[#EB4F26]" />
+          <Filter className="w-3.5 h-3.5 text-[#F15A24]" />
           <span>Специализации платформы Юспорт СФУ ({sections.length} направлений):</span>
         </div>
         <div className="flex flex-wrap gap-1.5 text-xs">
@@ -71,7 +71,7 @@ export const SportView: React.FC<SportViewProps> = ({ currentUser }) => {
               onClick={() => setSelectedCategory(cat)}
               className={`px-2.5 py-1 border text-xs font-medium transition-colors ${
                 selectedCategory === cat
-                  ? 'border-[#EB4F26] bg-[#EB4F26] text-white'
+                  ? 'border-[#F15A24] bg-[#F15A24] text-white'
                   : 'border-gray-200 bg-gray-50 text-gray-700 hover:bg-gray-100'
               }`}
             >
@@ -137,7 +137,7 @@ export const SportView: React.FC<SportViewProps> = ({ currentUser }) => {
 
               <button
                 onClick={() => handleBook(sec)}
-                className="px-3.5 py-1.5 text-xs font-semibold bg-[#EB4F26] hover:bg-[#d63f17] text-white transition-colors"
+                className="px-3.5 py-1.5 text-xs font-semibold bg-[#F15A24] hover:bg-[#d63f17] text-white transition-colors"
               >
                 Записаться
               </button>

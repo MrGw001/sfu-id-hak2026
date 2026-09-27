@@ -1,1 +1,107 @@
 @import "tailwindcss";
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  /* Строгие квадратные формы без скруглений везде в приложении */
+  *, *::before, *::after {
+    border-radius: 0px !important;
+  }
+
+  body {
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  /* Фоновые цвета по теме */
+  html.dark body {
+    background-color: #0c0d13 !important;
+    color: #f4f4f6 !important;
+  }
+
+  html:not(.dark) body {
+    background-color: #f8f9fa !important;
+    color: #111827 !important;
+  }
+
+  /* ТЕМНАЯ ТЕМА: автоматическая трансформация стандартных классов */
+  html.dark .bg-white {
+    background-color: #141620 !important;
+  }
+
+  html.dark .bg-gray-50 {
+    background-color: #101118 !important;
+  }
+
+  html.dark .bg-gray-100 {
+    background-color: #181a26 !important;
+  }
+
+  html.dark .bg-gray-200 {
+    background-color: #222536 !important;
+  }
+
+  html.dark .text-gray-950,
+  html.dark .text-gray-900,
+  html.dark .text-gray-800 {
+    color: #f4f4f6 !important;
+  }
+
+  html.dark .text-gray-700,
+  html.dark .text-gray-600 {
+    color: #cbd5e1 !important;
+  }
+
+  html.dark .text-gray-500,
+  html.dark .text-gray-400 {
+    color: #94a3b8 !important;
+  }
+
+  html.dark .border-gray-200,
+  html.dark .border-gray-300 {
+    border-color: #252839 !important;
+  }
+
+  html.dark .divide-gray-100 > :not([hidden]) ~ :not([hidden]),
+  html.dark .divide-gray-200 > :not([hidden]) ~ :not([hidden]) {
+    border-color: #252839 !important;
+  }
+
+  /* СВЕТЛАЯ ТЕМА: автоматическая трансформация темных классов */
+  html:not(.dark) .text-zinc-100,
+  html:not(.dark) .text-zinc-200 {
+    color: #111827 !important;
+  }
+
+  html:not(.dark) .text-zinc-300,
+  html:not(.dark) .text-zinc-400 {
+    color: #4b5563 !important;
+  }
+
+  html:not(.dark) .text-zinc-500 {
+    color: #6b7280 !important;
+  }
+
+  html:not(.dark) .bg-\[\#141620\],
+  html:not(.dark) .bg-\[\#141622\],
+  html:not(.dark) .bg-\[\#151722\] {
+    background-color: #ffffff !important;
+  }
+
+  html:not(.dark) .bg-\[\#191c28\],
+  html:not(.dark) .bg-\[\#1a1c2a\],
+  html:not(.dark) .bg-\[\#1b1e2c\],
+  html:not(.dark) .bg-\[\#191b29\] {
+    background-color: #f8f9fa !important;
+  }
+
+  html:not(.dark) .border-\[\#252839\],
+  html:not(.dark) .border-zinc-800 {
+    border-color: #e2e8f0 !important;
+  }
+}

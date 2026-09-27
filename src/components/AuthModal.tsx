@@ -66,7 +66,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                 value={loginInput}
                 onChange={(e) => setLoginInput(e.target.value)}
                 placeholder="ezhakov"
-                className="w-full pl-8 pr-3 py-1.5 text-xs bg-white border border-gray-300 focus:border-[#EB4F26] focus:outline-none"
+                className="w-full pl-8 pr-3 py-1.5 text-xs bg-white border border-gray-300 focus:border-[#F15A24] focus:outline-none"
               />
               <User className="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
             </div>
@@ -83,7 +83,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                 value={passwordInput}
                 onChange={(e) => setPasswordInput(e.target.value)}
                 placeholder="••••••"
-                className="w-full pl-8 pr-3 py-1.5 text-xs bg-white border border-gray-300 focus:border-[#EB4F26] focus:outline-none"
+                className="w-full pl-8 pr-3 py-1.5 text-xs bg-white border border-gray-300 focus:border-[#F15A24] focus:outline-none"
               />
               <Lock className="w-3.5 h-3.5 text-gray-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
             </div>
@@ -98,16 +98,16 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                 onClick={() => handleQuickFill('ezhakov', '123')}
                 className="w-full text-left p-1.5 hover:bg-gray-50 border border-gray-200 flex items-center justify-between"
               >
-                <span><strong>Студент:</strong> ezhakov (Жаков Егор Андреевич, КИИ26-02/3Б)</span>
-                <span className="text-[10px] text-[#EB4F26]">Выбрать</span>
+                <span><strong>Студент:</strong> ezhakov (Жаков Егор Андреевич, КИ26-02/3Б)</span>
+                <span className="text-[10px] text-[#F15A24]">Выбрать</span>
               </button>
               <button
                 type="button"
                 onClick={() => handleQuickFill('egolovkov', '123')}
                 className="w-full text-left p-1.5 hover:bg-gray-50 border border-gray-200 flex items-center justify-between"
               >
-                <span><strong>Староста:</strong> egolovkov (Головков Егор Романович, КИИ26-02/3Б)</span>
-                <span className="text-[10px] text-[#EB4F26]">Выбрать</span>
+                <span><strong>Староста:</strong> egolovkov (Головков Егор Романович, КИ26-02/3Б)</span>
+                <span className="text-[10px] text-[#F15A24]">Выбрать</span>
               </button>
               <button
                 type="button"
@@ -115,7 +115,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
                 className="w-full text-left p-1.5 hover:bg-gray-50 border border-gray-200 flex items-center justify-between"
               >
                 <span><strong>Преподаватель:</strong> kkirillov (Кириллов К. А., Аналитическая геометрия)</span>
-                <span className="text-[10px] text-[#EB4F26]">Выбрать</span>
+                <span className="text-[10px] text-[#F15A24]">Выбрать</span>
               </button>
             </div>
           </div>
@@ -130,7 +130,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onSuccess
             </button>
             <button
               type="submit"
-              className="px-4 py-1.5 text-xs font-semibold bg-[#EB4F26] hover:bg-[#d63f17] text-white transition-colors"
+              className="px-4 py-1.5 text-xs font-semibold bg-[#F15A24] hover:bg-[#d63f17] text-white transition-colors"
             >
               Войти
             </button>

@@ -52,6 +52,16 @@ class CertificateRequestSchema(BaseModel):
     delivery_type: str
     destination: str
 
+@app.get("/", tags=["Системные"])
+async def root():
+    return {
+        "message": "СФУ.ID Unified API Gateway работает успешно!",
+        "frontend_url": "http://localhost:3000",
+        "swagger_docs": "http://localhost:8000/docs",
+        "redoc": "http://localhost:8000/redoc",
+        "health": "http://localhost:8000/health"
+    }
+
 @app.get("/health", tags=["Системные"])
 async def health():
     return {

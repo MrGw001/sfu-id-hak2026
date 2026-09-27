@@ -35,7 +35,11 @@ class SfuApiGatewayService {
     try {
       const savedUser = localStorage.getItem('sfu_user_session_v4');
       if (savedUser) {
-        this.currentUser = JSON.parse(savedUser);
+        // Защита от старых кэшированных записей КИИ
+        const cleanedStr = savedUser.replace(/КИИ/g, 'КИ');
+        const parsed = JSON.parse(cleanedStr);
+        if (parsed.group) parsed.group = parsed.group.replace(/КИИ/g, 'КИ');
+        this.currentUser = parsed;
       }
     } catch {
       // storage ignored
@@ -75,15 +79,18 @@ class SfuApiGatewayService {
   }
 
   getCurrentUser(): UserProfile {
+    if (this.currentUser?.group) {
+      this.currentUser.group = this.currentUser.group.replace(/КИИ/g, 'КИ');
+    }
     return this.currentUser;
   }
 
-  // --- Расписание по выбранной группе (заглушка с точными данными группы КИИ26-02/3Б) ---
+  // --- Расписание по выбранной группе (заглушка с точными данными группы КИ26-02/3Б) ---
   getScheduleForGroup(groupName: string, instituteShort: string, dayName: string = 'Понедельник'): Lesson[] {
-    const cleanGroup = groupName.trim().toUpperCase() || 'КИИ26-02/3Б';
+    const cleanGroup = groupName.trim().toUpperCase() || 'КИ26-02/3Б';
 
-    // Для группы КИИ26-02/3Б (КИ26-02/3Б) отдаем точные ленты со скриншота расписания СФУ
-    if (cleanGroup.includes('КИ') || cleanGroup.includes('26') || cleanGroup.includes('КИИ')) {
+    // Для группы КИ26-02/3Б (КИ26-02/3Б) отдаем точные ленты со скриншота расписания СФУ
+    if (cleanGroup.includes('КИ') || cleanGroup.includes('26') || cleanGroup.includes('КИ')) {
       const dayLessons = MOCK_KI26_LESSONS.filter(l => l.dayName === dayName);
       return dayLessons;
     }

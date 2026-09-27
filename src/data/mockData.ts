@@ -20,7 +20,7 @@ export const MOCK_USERS: UserProfile[] = [
     institute: 'Институт космических и информационных технологий',
     instituteShort: 'ИКИТ СФУ',
     specialty: '10.03.01 Информационная безопасность',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     studentCardNumber: '832026',
     recordBookNumber: '26100301083',
     courseNumber: 1,
@@ -45,7 +45,7 @@ export const MOCK_USERS: UserProfile[] = [
     institute: 'Институт космических и информационных технологий',
     instituteShort: 'ИКИТ СФУ',
     specialty: '10.03.01 Информационная безопасность',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     studentCardNumber: '1062026',
     recordBookNumber: '26100301106',
     courseNumber: 1,
@@ -70,7 +70,7 @@ export const MOCK_USERS: UserProfile[] = [
     institute: 'Институт космических и информационных технологий',
     instituteShort: 'ИКИТ СФУ',
     specialty: 'Кафедра прикладной математики и компьютерной безопасности (Аналитическая геометрия)',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     studentCardNumber: '4410291',
     recordBookNumber: '201609112',
     courseNumber: 0,
@@ -86,7 +86,7 @@ export const MOCK_USERS: UserProfile[] = [
   }
 ];
 
-// Точное расписание группы КИИ26-02/3Б со скриншота timetable.sfu-kras.ru
+// Точное расписание группы КИ26-02/3Б со скриншота timetable.sfu-kras.ru
 export const MOCK_KI26_LESSONS: Lesson[] = [
   // --- Понедельник, 28 сентября ---
   {
@@ -100,7 +100,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Корпус №17 ИКИТ',
     buildingAddress: 'ул. Академика Киренского, 26',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'even', // Четная неделя
     dayName: 'Понедельник',
   },
@@ -115,7 +115,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Корпус №17 ИКИТ',
     buildingAddress: 'ул. Академика Киренского, 26',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'odd', // Нечетная неделя
     dayName: 'Понедельник',
   },
@@ -130,7 +130,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Корпус №17 ИКИТ',
     buildingAddress: 'ул. Академика Киренского, 26',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'even', // Четная неделя
     dayName: 'Понедельник',
   },
@@ -145,7 +145,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Корпус №17 ИКИТ',
     buildingAddress: 'ул. Академика Киренского, 26',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'odd', // Нечетная неделя
     dayName: 'Понедельник',
   },
@@ -160,7 +160,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Корпус №17 ИКИТ',
     buildingAddress: 'ул. Академика Киренского, 26',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'even', // Четная неделя
     dayName: 'Понедельник',
   },
@@ -175,7 +175,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Корпус №17 ИКИТ',
     buildingAddress: 'ул. Академика Киренского, 26',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'odd', // Нечетная неделя
     dayName: 'Понедельник',
   },
@@ -192,7 +192,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Корпус №17 ИКИТ',
     buildingAddress: 'ул. Академика Киренского, 26',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'even', // Четная неделя
     dayName: 'Вторник',
   },
@@ -209,7 +209,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Корпус №17 ИКИТ',
     buildingAddress: 'ул. Академика Киренского, 26',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'odd', // Нечетная неделя
     dayName: 'Среда',
   },
@@ -224,7 +224,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Электронная информационно-образовательная среда СФУ',
     buildingAddress: 'e.sfu-kras.ru',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'even', // Четная неделя
     dayName: 'Среда',
   },
@@ -239,7 +239,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Корпус №17 ИКИТ',
     buildingAddress: 'ул. Академика Киренского, 26',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'odd', // Нечетная неделя
     dayName: 'Среда',
   },
@@ -254,7 +254,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Электронная информационно-образовательная среда СФУ',
     buildingAddress: 'e.sfu-kras.ru',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'even', // Четная неделя
     dayName: 'Среда',
   },
@@ -269,7 +269,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Корпус №17 ИКИТ',
     buildingAddress: 'ул. Академика Киренского, 26',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'odd', // Нечетная неделя
     dayName: 'Среда',
   },
@@ -286,7 +286,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Корпус №17 ИКИТ',
     buildingAddress: 'ул. Академика Киренского, 26',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'even', // Четная неделя
     dayName: 'Четверг',
   },
@@ -301,7 +301,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 15,
     buildingName: 'Корпус №15',
     buildingAddress: 'ул. Академика Киренского, 15',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'odd', // Нечетная неделя
     dayName: 'Четверг',
   },
@@ -316,7 +316,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Корпус №17 ИКИТ',
     buildingAddress: 'ул. Академика Киренского, 26',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'odd', // Нечетная неделя
     dayName: 'Четверг',
   },
@@ -333,7 +333,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Корпус №17 ИКИТ',
     buildingAddress: 'ул. Академика Киренского, 26',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'odd', // Нечетная неделя
     dayName: 'Пятница',
   },
@@ -348,7 +348,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Корпус №17 ИКИТ',
     buildingAddress: 'ул. Академика Киренского, 26',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'odd', // Нечетная неделя
     dayName: 'Пятница',
   },
@@ -363,7 +363,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 15,
     buildingName: 'Корпус №15',
     buildingAddress: 'ул. Академика Киренского, 15',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'even', // Четная неделя
     dayName: 'Пятница',
   },
@@ -378,7 +378,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Корпус №17 ИКИТ',
     buildingAddress: 'ул. Академика Киренского, 26',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'odd', // Нечетная неделя
     dayName: 'Пятница',
   },
@@ -393,7 +393,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Корпус №17 ИКИТ',
     buildingAddress: 'ул. Академика Киренского, 26',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'odd', // Нечетная неделя
     dayName: 'Пятница',
   },
@@ -410,7 +410,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 15,
     buildingName: 'Корпус №15',
     buildingAddress: 'ул. Академика Киренского, 15',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'odd', // Нечетная неделя
     dayName: 'Суббота',
   },
@@ -425,7 +425,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Корпус №17 ИКИТ',
     buildingAddress: 'ул. Академика Киренского, 26',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'even', // Четная неделя
     dayName: 'Суббота',
   },
@@ -440,7 +440,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Корпус №17 ИКИТ',
     buildingAddress: 'ул. Академика Киренского, 26',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'odd', // Нечетная неделя
     dayName: 'Суббота',
   },
@@ -455,7 +455,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Корпус №17 ИКИТ',
     buildingAddress: 'ул. Академика Киренского, 26',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'odd', // Нечетная неделя
     dayName: 'Суббота',
   },
@@ -470,7 +470,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Корпус №17 ИКИТ',
     buildingAddress: 'ул. Академика Киренского, 26',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'odd', // Нечетная неделя
     dayName: 'Суббота',
   },
@@ -485,7 +485,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Электронная информационно-образовательная среда СФУ',
     buildingAddress: 'e.sfu-kras.ru',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'even', // Четная неделя
     dayName: 'Суббота',
   },
@@ -500,7 +500,7 @@ export const MOCK_KI26_LESSONS: Lesson[] = [
     buildingNumber: 17,
     buildingName: 'Электронная информационно-образовательная среда СФУ',
     buildingAddress: 'e.sfu-kras.ru',
-    group: 'КИИ26-02/3Б',
+    group: 'КИ26-02/3Б',
     weekType: 'odd', // Нечетная неделя
     dayName: 'Суббота',
   }
@@ -537,16 +537,30 @@ export const MOCK_ATTENDANCE: AttendanceRecord[] = [
   { id: 'att-25', studentName: 'Эрхеев Арья Александрович', studentCard: '83/2026', present: true, reason: 'Присутствует' },
 ];
 
+export interface Ki26Student {
+  id: string;
+  fullName: string;
+  studentCard: string;
+  isHeadman?: boolean;
+}
+
+export const MOCK_KI26_STUDENTS: Ki26Student[] = MOCK_ATTENDANCE.map(a => ({
+  id: a.id,
+  fullName: a.studentName.replace(' (староста)', ''),
+  studentCard: a.studentCard,
+  isHeadman: a.studentName.includes('(староста)')
+}));
+
 // Оценки по предмету "Аналитическая геометрия" преподавателя Кириллова К. А. для группы КИ26-02/3Б
 export const MOCK_TEACHER_GRADES: TeacherGradeEntry[] = [
-  { id: 'tg-1', studentName: 'Жаков Егор Андреевич', group: 'КИИ26-02/3Б', controlType: 'Коллоквиум №1 (Векторная алгебра)', score: 20, maxScore: 20, status: 'Оценено' },
-  { id: 'tg-2', studentName: 'Головков Егор Романович', group: 'КИИ26-02/3Б', controlType: 'Коллоквиум №1 (Векторная алгебра)', score: 20, maxScore: 20, status: 'Оценено' },
-  { id: 'tg-3', studentName: 'Абдуллаев Микаил Муслимович', group: 'КИИ26-02/3Б', controlType: 'Коллоквиум №1 (Векторная алгебра)', score: 18, maxScore: 20, status: 'Оценено' },
-  { id: 'tg-4', studentName: 'Зайцева Анастасия Сергеевна', group: 'КИИ26-02/3Б', controlType: 'Коллоквиум №1 (Векторная алгебра)', score: 19, maxScore: 20, status: 'Оценено' },
-  { id: 'tg-5', studentName: 'Воробьев Мирон Дмитриевич', group: 'КИИ26-02/3Б', controlType: 'Коллоквиум №1 (Векторная алгебра)', score: 0, maxScore: 20, status: 'Не сдано' },
-  { id: 'tg-6', studentName: 'Евдокимов Арсений Владимирович', group: 'КИИ26-02/3Б', controlType: 'Коллоквиум №1 (Векторная алгебра)', score: 17, maxScore: 20, status: 'Оценено' },
-  { id: 'tg-7', studentName: 'Ниденталь Максим Андреевич', group: 'КИИ26-02/3Б', controlType: 'Коллоквиум №1 (Векторная алгебра)', score: 16, maxScore: 20, status: 'Оценено' },
-  { id: 'tg-8', studentName: 'Шадрин Лев Игоревич', group: 'КИИ26-02/3Б', controlType: 'Коллоквиум №1 (Векторная алгебра)', score: 0, maxScore: 20, status: 'На проверке' },
+  { id: 'tg-1', studentName: 'Жаков Егор Андреевич', group: 'КИ26-02/3Б', controlType: 'Коллоквиум №1 (Векторная алгебра)', score: 20, maxScore: 20, status: 'Оценено' },
+  { id: 'tg-2', studentName: 'Головков Егор Романович', group: 'КИ26-02/3Б', controlType: 'Коллоквиум №1 (Векторная алгебра)', score: 20, maxScore: 20, status: 'Оценено' },
+  { id: 'tg-3', studentName: 'Абдуллаев Микаил Муслимович', group: 'КИ26-02/3Б', controlType: 'Коллоквиум №1 (Векторная алгебра)', score: 18, maxScore: 20, status: 'Оценено' },
+  { id: 'tg-4', studentName: 'Зайцева Анастасия Сергеевна', group: 'КИ26-02/3Б', controlType: 'Коллоквиум №1 (Векторная алгебра)', score: 19, maxScore: 20, status: 'Оценено' },
+  { id: 'tg-5', studentName: 'Воробьев Мирон Дмитриевич', group: 'КИ26-02/3Б', controlType: 'Коллоквиум №1 (Векторная алгебра)', score: 0, maxScore: 20, status: 'Не сдано' },
+  { id: 'tg-6', studentName: 'Евдокимов Арсений Владимирович', group: 'КИ26-02/3Б', controlType: 'Коллоквиум №1 (Векторная алгебра)', score: 17, maxScore: 20, status: 'Оценено' },
+  { id: 'tg-7', studentName: 'Ниденталь Максим Андреевич', group: 'КИ26-02/3Б', controlType: 'Коллоквиум №1 (Векторная алгебра)', score: 16, maxScore: 20, status: 'Оценено' },
+  { id: 'tg-8', studentName: 'Шадрин Лев Игоревич', group: 'КИ26-02/3Б', controlType: 'Коллоквиум №1 (Векторная алгебра)', score: 0, maxScore: 20, status: 'На проверке' },
 ];
 
 // Специализации в точности как на скриншотах платформы Юспорт СФУ (u-sport.sfu-kras.ru/spec/specializations_list_by_sport/)

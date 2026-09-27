@@ -32,13 +32,13 @@ export const TeacherGradingView: React.FC<TeacherGradingViewProps> = ({ currentU
               Кабинет преподавателя — Электронная ведомость БРС
             </div>
             <p className="text-xs text-gray-500 mt-0.5">
-              Дисциплина: «Аналитическая геометрия» • Группа {currentUser.group || 'КИИ26-02/3Б'} • Преподаватель: {currentUser.fullName}
+              Дисциплина: «Аналитическая геометрия» • Группа {currentUser.group || 'КИ26-02/3Б'} • Преподаватель: {currentUser.fullName}
             </p>
           </div>
 
           <button
             onClick={handleSave}
-            className="px-3.5 py-1.5 bg-[#EB4F26] hover:bg-[#d63f17] text-white text-xs font-semibold flex items-center gap-1.5 self-start sm:self-auto transition-colors"
+            className="px-3.5 py-1.5 bg-[#F15A24] hover:bg-[#d63f17] text-white text-xs font-semibold flex items-center gap-1.5 self-start sm:self-auto transition-colors"
           >
             <Save className="w-3.5 h-3.5" />
             <span>Утвердить ведомость</span>

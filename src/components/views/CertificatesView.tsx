@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { CertificateRequest, UserProfile } from '../../types';
 import { apiGateway } from '../../services/apiGateway';
-import { Plus, Check, Clock, Stamp, Calendar, CheckCircle2 } from 'lucide-react';
+import { Plus, Check, Clock, Stamp, Calendar, CheckCircle2, AlertCircle } from 'lucide-react';
 
 interface CertificatesViewProps {
   currentUser: UserProfile;
+  isDark?: boolean;
 }
 
-export const CertificatesView: React.FC<CertificatesViewProps> = ({ currentUser }) => {
+export const CertificatesView: React.FC<CertificatesViewProps> = ({ currentUser, isDark = true }) => {
   const isTeacher = currentUser.role === 'teacher';
   const [certs, setCerts] = useState<CertificateRequest[]>(apiGateway.getCertificates(isTeacher));
   const [title, setTitle] = useState(
@@ -58,21 +59,38 @@ export const CertificatesView: React.FC<CertificatesViewProps> = ({ currentUser 
   };
 
   return (
-    <div className="space-y-4">
+    <div className={`space-y-4 ${isDark ? 'text-[#f4f4f6]' : 'text-gray-900'}`}>
+      
       {/* Шапка ДЕКАНАТА / ОТДЕЛА КАДРОВ */}
-      <div className="bg-white border border-gray-200 p-4">
-        <div className="text-base font-bold text-gray-900 mb-1">
+      <div className={`border p-4 rounded-none ${
+        isDark ? 'bg-[#141620] border-[#252839]' : 'bg-white border-gray-300 shadow-xs'
+      }`}>
+        <div className={`text-base font-bold mb-1 ${isDark ? 'text-white' : 'text-gray-900'}`}>
           {isTeacher ? 'Заказ справок и кадровых документов — Управление персонала СФУ' : 'Заказ справок — Деканат ИКИТ'}
         </div>
-        <p className="text-xs text-gray-500">
+        <p className={`text-xs ${isDark ? 'text-zinc-400' : 'text-gray-600'}`}>
           {isTeacher
             ? 'Оформлением кадровых и финансовых документов для профессорско-преподавательского состава занимается Отдел кадров ППС (каб. УЛК-104, ул. Академика Киренского, 26).'
             : 'Выдачей и заверением справок занимается деканат института (каб. УЛК-218, ул. Академика Киренского, 26).'}
         </p>
 
+        {/* Уведомление для 1 курса по дате 01.12.2026 */}
+        {!isTeacher && (
+          <div className={`mt-3 p-2.5 rounded-none border text-xs flex items-center gap-2 ${
+            isDark 
+              ? 'bg-[#1e1c18] border-amber-600/40 text-amber-300' 
+              : 'bg-amber-50 border-amber-200 text-amber-900'
+          }`}>
+            <AlertCircle className="w-4 h-4 text-[#F15A24] shrink-0" />
+            <span>
+              <strong>Внимание 1 курс:</strong> Справка о размере стипендии заказывается не ранее <strong>01.12.2026</strong>. До этого момента справка заказывается по предыдущему месту обучения!
+            </span>
+          </div>
+        )}
+
         {isOrdered && (
-          <div className="mt-3 p-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center gap-2">
-            <Check className="w-4 h-4 text-emerald-600 shrink-0" />
+          <div className="mt-3 p-2.5 bg-emerald-500/15 border border-emerald-500/40 text-emerald-400 text-xs flex items-center gap-2 rounded-none">
+            <Check className="w-4 h-4 text-emerald-500 shrink-0" />
             <span>
               {isTeacher
                 ? 'Заявление успешно зарегистрировано в управлении персонала СФУ с указанным временем готовности!'
@@ -85,21 +103,27 @@ export const CertificatesView: React.FC<CertificatesViewProps> = ({ currentUser 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
         
         {/* Форма заказа с выбором гербовой печати и срока готовности */}
-        <div className="lg:col-span-5 bg-white border border-gray-200 p-4">
-          <div className="text-xs font-bold text-gray-800 mb-3 uppercase tracking-wider">
+        <div className={`lg:col-span-5 border p-4 rounded-none ${
+          isDark ? 'bg-[#141620] border-[#252839]' : 'bg-white border-gray-300 shadow-xs'
+        }`}>
+          <div className={`text-xs font-bold mb-3 uppercase tracking-wider ${isDark ? 'text-zinc-200' : 'text-gray-800'}`}>
             {isTeacher ? 'Заявление в отдел кадров ППС' : 'Заявление в деканат'}
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-3.5">
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">
+              <label className={`block text-xs font-medium mb-1 ${isDark ? 'text-zinc-300' : 'text-gray-700'}`}>
                 Вид справки / документа
               </label>
               {isTeacher ? (
                 <select
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="w-full px-2.5 py-1.5 text-xs bg-white border border-gray-300 focus:border-[#EB4F26] focus:outline-none"
+                  className={`w-full px-2.5 py-1.5 text-xs border rounded-none focus:outline-none ${
+                    isDark 
+                      ? 'bg-[#191c28] border-[#2f3347] text-white focus:border-[#F15A24]' 
+                      : 'bg-white border-gray-300 text-gray-900 focus:border-[#F15A24]'
+                  }`}
                 >
                   <option value="Справка с места работы (подтверждение должности преподавателя)">
                     Справка с места работы (подтверждение должности преподавателя)
@@ -121,18 +145,23 @@ export const CertificatesView: React.FC<CertificatesViewProps> = ({ currentUser 
                 <select
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="w-full px-2.5 py-1.5 text-xs bg-white border border-gray-300 focus:border-[#EB4F26] focus:outline-none"
+                  className={`w-full px-2.5 py-1.5 text-xs border rounded-none focus:outline-none ${
+                    isDark 
+                      ? 'bg-[#191c28] border-[#2f3347] text-white focus:border-[#F15A24]' 
+                      : 'bg-white border-gray-300 text-gray-900 focus:border-[#F15A24]'
+                  }`}
                 >
                   <option value="Справка об обучении в СФУ">Справка об обучении в СФУ</option>
                   <option value="Справка в военный комиссариат (Приложение №4)">Справка в военкомат (Приложение №4)</option>
                   <option value="Справка об оплате обучения для налогового вычета">Справка для налогового вычета (ФНС)</option>
+                  <option value="Справка о размере стипендии (с 01.12.2026)">Справка о размере стипендии (доступно с 01.12.2026)</option>
                   <option value="Академическая выписка оценок">Академическая выписка оценок за все семестры</option>
                 </select>
               )}
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">
+              <label className={`block text-xs font-medium mb-1 ${isDark ? 'text-zinc-300' : 'text-gray-700'}`}>
                 Место требования (куда предоставляется)
               </label>
               <input
@@ -141,25 +170,51 @@ export const CertificatesView: React.FC<CertificatesViewProps> = ({ currentUser 
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
                 placeholder={isTeacher ? "Например: В банк для оформления ипотеки" : "Например: Военкомат Октябрьского района"}
-                className="w-full px-2.5 py-1.5 text-xs bg-white border border-gray-300 focus:border-[#EB4F26] focus:outline-none"
+                className={`w-full px-2.5 py-1.5 text-xs border rounded-none focus:outline-none ${
+                  isDark 
+                    ? 'bg-[#191c28] border-[#2f3347] text-white placeholder-zinc-500 focus:border-[#F15A24]' 
+                    : 'bg-white border-gray-300 text-gray-900 placeholder-gray-400 focus:border-[#F15A24]'
+                }`}
               />
             </div>
 
-            {/* Выбор гербовой печати СФУ */}
-            <div className={`p-3 border transition-colors ${withOfficialSeal ? 'bg-blue-50/60 border-blue-200' : 'bg-gray-50 border-gray-200'}`}>
-              <label className="flex items-start gap-2.5 cursor-pointer text-xs font-semibold text-gray-900 select-none">
+            {/* ВЫБОР ГЕРБОВОЙ ПЕЧАТИ СФУ: ИДЕАЛЬНАЯ КОНТРАСТНОСТЬ В ОБЕИХ ТЕМАХ */}
+            <div className={`p-3 border rounded-none transition-colors ${
+              withOfficialSeal 
+                ? (isDark 
+                    ? 'bg-[#131d33] border-blue-500/60 shadow-inner' 
+                    : 'bg-blue-50/90 border-blue-300')
+                : (isDark 
+                    ? 'bg-[#191c28] border-[#252839]' 
+                    : 'bg-gray-50 border-gray-200')
+            }`}>
+              <label className="flex items-start gap-2.5 cursor-pointer select-none">
                 <input
                   type="checkbox"
                   checked={withOfficialSeal}
                   onChange={(e) => setWithOfficialSeal(e.target.checked)}
-                  className="w-4 h-4 mt-0.5 text-[#EB4F26] border-gray-300 focus:ring-[#EB4F26]"
+                  className="w-4 h-4 mt-0.5 text-[#F15A24] focus:ring-[#F15A24] rounded-none shrink-0"
                 />
-                <div>
+                <div className="flex-1">
                   <div className="flex items-center gap-1.5">
-                    <Stamp className="w-3.5 h-3.5 text-blue-700" />
-                    <span>Синяя гербовая печать СФУ</span>
+                    <Stamp className={`w-3.5 h-3.5 ${
+                      withOfficialSeal 
+                        ? (isDark ? 'text-blue-400' : 'text-blue-700') 
+                        : (isDark ? 'text-zinc-500' : 'text-gray-500')
+                    }`} />
+                    <span className={`text-xs font-bold ${
+                      withOfficialSeal
+                        ? (isDark ? 'text-blue-200' : 'text-blue-950')
+                        : (isDark ? 'text-zinc-300' : 'text-gray-800')
+                    }`}>
+                      Синяя гербовая печать СФУ
+                    </span>
                   </div>
-                  <p className="text-[11px] text-gray-500 font-normal mt-0.5 leading-tight">
+                  <p className={`text-[11px] mt-1 leading-snug ${
+                    withOfficialSeal
+                      ? (isDark ? 'text-blue-300/80' : 'text-blue-900/80')
+                      : (isDark ? 'text-zinc-400' : 'text-gray-600')
+                  }`}>
                     Официальный круглый гербовый оттиск СФУ с регистрационным номером. Требуется для военкоматов, Соцзащиты, ПФР и посольств.
                   </p>
                 </div>
@@ -168,7 +223,7 @@ export const CertificatesView: React.FC<CertificatesViewProps> = ({ currentUser 
 
             {/* Выбор нужного времени готовности справки */}
             <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1.5">
+              <label className={`block text-xs font-medium mb-1.5 ${isDark ? 'text-zinc-300' : 'text-gray-700'}`}>
                 Нужное время готовности справки:
               </label>
               
@@ -176,56 +231,74 @@ export const CertificatesView: React.FC<CertificatesViewProps> = ({ currentUser 
                 <button
                   type="button"
                   onClick={() => setTimingMode('regular')}
-                  className={`p-2 border text-left transition-colors ${
+                  className={`p-2 border rounded-none text-left transition-colors ${
                     timingMode === 'regular'
-                      ? 'border-[#EB4F26] bg-orange-50/60 font-bold text-gray-900'
-                      : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50'
+                      ? (isDark 
+                          ? 'border-[#F15A24] bg-[#F15A24]/15 text-white font-bold ring-1 ring-[#F15A24]' 
+                          : 'border-[#F15A24] bg-orange-50 font-bold text-gray-900')
+                      : (isDark 
+                          ? 'border-[#252839] bg-[#191c28] text-zinc-300 hover:border-[#F15A24]/40' 
+                          : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50')
                   }`}
                 >
                   <div className="font-semibold text-xs leading-tight">Обычный</div>
-                  <div className="text-[10px] text-gray-500 mt-0.5">3 раб. дня</div>
+                  <div className={`text-[10px] mt-0.5 ${isDark ? 'text-zinc-400' : 'text-gray-500'}`}>3 раб. дня</div>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setTimingMode('urgent')}
-                  className={`p-2 border text-left transition-colors ${
+                  className={`p-2 border rounded-none text-left transition-colors ${
                     timingMode === 'urgent'
-                      ? 'border-[#EB4F26] bg-orange-50/60 font-bold text-gray-900'
-                      : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50'
+                      ? (isDark 
+                          ? 'border-[#F15A24] bg-[#F15A24]/15 text-white font-bold ring-1 ring-[#F15A24]' 
+                          : 'border-[#F15A24] bg-orange-50 font-bold text-gray-900')
+                      : (isDark 
+                          ? 'border-[#252839] bg-[#191c28] text-zinc-300 hover:border-[#F15A24]/40' 
+                          : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50')
                   }`}
                 >
-                  <div className="font-semibold text-xs text-[#EB4F26] leading-tight">Срочно</div>
-                  <div className="text-[10px] text-gray-500 mt-0.5">1 раб. день</div>
+                  <div className="font-semibold text-xs text-[#F15A24] leading-tight">Срочно</div>
+                  <div className={`text-[10px] mt-0.5 ${isDark ? 'text-zinc-400' : 'text-gray-500'}`}>1 раб. день</div>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => setTimingMode('custom')}
-                  className={`p-2 border text-left transition-colors ${
+                  className={`p-2 border rounded-none text-left transition-colors ${
                     timingMode === 'custom'
-                      ? 'border-[#EB4F26] bg-orange-50/60 font-bold text-gray-900'
-                      : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50'
+                      ? (isDark 
+                          ? 'border-[#F15A24] bg-[#F15A24]/15 text-white font-bold ring-1 ring-[#F15A24]' 
+                          : 'border-[#F15A24] bg-orange-50 font-bold text-gray-900')
+                      : (isDark 
+                          ? 'border-[#252839] bg-[#191c28] text-zinc-300 hover:border-[#F15A24]/40' 
+                          : 'border-gray-200 bg-white text-gray-700 hover:bg-gray-50')
                   }`}
                 >
                   <div className="font-semibold text-xs leading-tight">К дате/времени</div>
-                  <div className="text-[10px] text-gray-500 mt-0.5">Указать время</div>
+                  <div className={`text-[10px] mt-0.5 ${isDark ? 'text-zinc-400' : 'text-gray-500'}`}>Указать время</div>
                 </button>
               </div>
 
               {/* Поле выбора конкретной даты и времени */}
               {timingMode === 'custom' && (
-                <div className="mt-2.5 p-2.5 bg-gray-50 border border-gray-200 space-y-1">
-                  <label className="block text-[11px] font-medium text-gray-600">
+                <div className={`mt-2.5 p-2.5 border rounded-none space-y-1 ${
+                  isDark ? 'bg-[#191c28] border-[#252839]' : 'bg-gray-50 border-gray-200'
+                }`}>
+                  <label className={`block text-[11px] font-medium ${isDark ? 'text-zinc-300' : 'text-gray-700'}`}>
                     Укажите нужную дату и время:
                   </label>
                   <input
                     type="datetime-local"
                     value={customDateTime}
                     onChange={(e) => setCustomDateTime(e.target.value)}
-                    className="w-full px-2.5 py-1.5 text-xs bg-white border border-gray-300 focus:border-[#EB4F26] focus:outline-none font-mono"
+                    className={`w-full px-2.5 py-1.5 text-xs border rounded-none font-mono focus:outline-none ${
+                      isDark 
+                        ? 'bg-[#141620] border-[#2f3347] text-white focus:border-[#F15A24]' 
+                        : 'bg-white border-gray-300 text-gray-900 focus:border-[#F15A24]'
+                    }`}
                   />
-                  <div className="text-[10px] text-gray-500">
+                  <div className={`text-[10px] ${isDark ? 'text-zinc-400' : 'text-gray-500'}`}>
                     {isTeacher 
                       ? 'Отдел кадров подготовит документ строго к указанному сроку.'
                       : 'Деканат подготовит и подпишет справку строго к указанному сроку.'}
@@ -235,14 +308,16 @@ export const CertificatesView: React.FC<CertificatesViewProps> = ({ currentUser 
             </div>
 
             {/* Индикатор срока */}
-            <div className="p-2.5 bg-blue-50 border border-blue-200 text-blue-900 text-[11px] flex items-center gap-2">
-              <Clock className="w-3.5 h-3.5 shrink-0 text-blue-600" />
+            <div className={`p-2.5 border rounded-none text-[11px] flex items-center gap-2 ${
+              isDark ? 'bg-[#131d33] border-blue-600/40 text-blue-200' : 'bg-blue-50 border-blue-200 text-blue-900'
+            }`}>
+              <Clock className="w-3.5 h-3.5 shrink-0 text-[#F15A24]" />
               <span>{getEstimatedDurationText()}</span>
             </div>
 
             <button
               type="submit"
-              className="w-full py-2 text-xs font-semibold bg-[#EB4F26] hover:bg-[#d63f17] text-white flex items-center justify-center gap-1.5 transition-colors"
+              className="w-full py-2 text-xs font-semibold bg-[#F15A24] hover:bg-[#d84a18] text-white flex items-center justify-center gap-1.5 transition-colors rounded-none"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>{isTeacher ? 'Подать заявку в отдел кадров' : 'Подать заявку в деканат'}</span>
@@ -251,59 +326,69 @@ export const CertificatesView: React.FC<CertificatesViewProps> = ({ currentUser 
         </div>
 
         {/* Список текущих справок */}
-        <div className="lg:col-span-7 bg-white border border-gray-200 p-4">
-          <div className="text-xs font-bold text-gray-800 mb-3 uppercase tracking-wider">
+        <div className={`lg:col-span-7 border p-4 rounded-none ${
+          isDark ? 'bg-[#141620] border-[#252839]' : 'bg-white border-gray-300 shadow-xs'
+        }`}>
+          <div className={`text-xs font-bold mb-3 uppercase tracking-wider ${isDark ? 'text-zinc-200' : 'text-gray-800'}`}>
             {isTeacher ? 'Журнал кадровых документов' : 'Журнал заявлений в деканат'} ({certs.length})
           </div>
 
-          <div className="divide-y divide-gray-100">
+          <div className={`divide-y ${isDark ? 'divide-[#252839]' : 'divide-gray-100'}`}>
             {certs.map((c) => (
               <div key={c.id} className="py-3 first:pt-0 last:pb-0">
                 <div className="flex items-start justify-between gap-2">
                   <div className="space-y-1">
-                    <div className="text-xs font-bold text-gray-900 leading-snug">
+                    <div className={`text-xs font-bold leading-snug ${isDark ? 'text-white' : 'text-gray-900'}`}>
                       {c.title}
                     </div>
-                    <div className="text-[11px] text-gray-600">
-                      Куда: <span className="font-medium text-gray-800">{c.destination}</span>
+                    <div className={`text-[11px] ${isDark ? 'text-zinc-400' : 'text-gray-600'}`}>
+                      Куда: <span className={`font-medium ${isDark ? 'text-zinc-200' : 'text-gray-800'}`}>{c.destination}</span>
                     </div>
 
                     <div className="flex flex-wrap items-center gap-2 mt-1.5 text-[11px]">
-                      {/* Метка гербовой печати */}
+                      {/* Метка гербовой печати с четким контрастом */}
                       {c.withOfficialSeal ? (
-                        <span className="inline-flex items-center gap-1 text-blue-700 bg-blue-50 border border-blue-200 px-1.5 py-0.5 font-medium">
-                          <Stamp className="w-3 h-3 text-blue-600" />
+                        <span className={`inline-flex items-center gap-1 px-1.5 py-0.5 font-medium border rounded-none ${
+                          isDark 
+                            ? 'bg-[#131d33] border-blue-500/50 text-blue-300' 
+                            : 'bg-blue-50 border-blue-200 text-blue-800'
+                        }`}>
+                          <Stamp className="w-3 h-3 text-[#F15A24]" />
                           <span>Гербовая печать</span>
                         </span>
                       ) : (
-                        <span className="text-gray-400 bg-gray-50 border border-gray-200 px-1.5 py-0.5">
+                        <span className={`px-1.5 py-0.5 border rounded-none ${
+                          isDark ? 'bg-[#191c28] border-[#2f3347] text-zinc-400' : 'bg-gray-50 border-gray-200 text-gray-500'
+                        }`}>
                           Без печати (выписка)
                         </span>
                       )}
 
                       {/* Нужное время / срок */}
-                      <span className="text-gray-600 bg-gray-50 border border-gray-200 px-1.5 py-0.5 flex items-center gap-1">
-                        <Clock className="w-3 h-3 text-gray-400" />
+                      <span className={`px-1.5 py-0.5 flex items-center gap-1 border rounded-none ${
+                        isDark ? 'bg-[#191c28] border-[#2f3347] text-zinc-300' : 'bg-gray-50 border-gray-200 text-gray-700'
+                      }`}>
+                        <Clock className={`w-3 h-3 ${isDark ? 'text-zinc-400' : 'text-gray-400'}`} />
                         <span>{c.readyTimeEst}</span>
                       </span>
                     </div>
 
-                    <div className="text-[11px] text-gray-500 pt-0.5">
-                      Место выдачи: <span className="text-gray-700 font-medium">{c.pickupOffice}</span>
+                    <div className={`text-[11px] pt-0.5 ${isDark ? 'text-zinc-400' : 'text-gray-500'}`}>
+                      Место выдачи: <span className={`font-medium ${isDark ? 'text-zinc-200' : 'text-gray-700'}`}>{c.pickupOffice}</span>
                     </div>
                   </div>
 
                   <div className="shrink-0 text-right">
-                    <span className={`inline-block px-2 py-0.5 text-[10px] font-bold border ${
-                      c.status === 'Готова к выдаче в деканате'
-                        ? 'bg-emerald-50 text-emerald-800 border-emerald-300'
-                        : c.status === 'Подписана деканом'
-                        ? 'bg-blue-50 text-blue-800 border-blue-300'
-                        : 'bg-amber-50 text-amber-800 border-amber-300'
+                    <span className={`inline-block px-2 py-0.5 text-[10px] font-bold border rounded-none ${
+                      c.status.includes('Готова')
+                        ? (isDark ? 'bg-emerald-950/40 text-emerald-400 border-emerald-700/50' : 'bg-emerald-50 text-emerald-800 border-emerald-300')
+                        : c.status.includes('Подписана')
+                        ? (isDark ? 'bg-blue-950/40 text-blue-300 border-blue-700/50' : 'bg-blue-50 text-blue-800 border-blue-300')
+                        : (isDark ? 'bg-amber-950/40 text-amber-300 border-amber-700/50' : 'bg-amber-50 text-amber-800 border-amber-300')
                     }`}>
                       {c.status}
                     </span>
-                    <div className="text-[10px] text-gray-400 mt-1">
+                    <div className={`text-[10px] mt-1 ${isDark ? 'text-zinc-500' : 'text-gray-400'}`}>
                       Заказ от {c.requestedAt}
                     </div>
                   </div>
@@ -312,7 +397,9 @@ export const CertificatesView: React.FC<CertificatesViewProps> = ({ currentUser 
             ))}
           </div>
 
-          <div className="mt-4 pt-3 border-t border-gray-100 text-[11px] text-gray-500 flex items-center justify-between">
+          <div className={`mt-4 pt-3 border-t text-[11px] flex items-center justify-between ${
+            isDark ? 'border-[#252839] text-zinc-400' : 'border-gray-200 text-gray-600'
+          }`}>
             <span>График работы деканата ИКИТ: Пн–Пт с 08:30 до 17:00</span>
             <span>Телефон: +7 (391) 291-22-11</span>
           </div>

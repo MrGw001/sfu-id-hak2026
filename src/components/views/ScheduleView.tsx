@@ -9,13 +9,13 @@ interface ScheduleViewProps {
 
 export const ScheduleView: React.FC<ScheduleViewProps> = ({ currentUser }) => {
   const isTeacher = currentUser.role === 'teacher';
-  const currentGroup = currentUser.group || 'КИИ26-02/3Б';
+  const currentGroup = currentUser.group || 'КИ26-02/3Б';
   const [selectedDay, setSelectedDay] = useState('Понедельник');
   const [weekType, setWeekType] = useState<'all' | 'even' | 'odd'>('even'); // В СФУ сейчас идет четная неделя (как на скриншоте)
 
   const daysOfWeek = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 
-  // Получаем ленты из точной базы расписания СФУ для КИИ26-02/3Б
+  // Получаем ленты из точной базы расписания СФУ для КИ26-02/3Б
   const allDayLessons = apiGateway.getScheduleForGroup(currentGroup, currentUser.instituteShort, selectedDay);
 
   // Фильтруем по четности
@@ -53,7 +53,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({ currentUser }) => {
       {/* Если преподаватель — выводим специальную плашку пустого расписания (В разработке) */}
       {isTeacher ? (
         <div className="bg-white border border-gray-200 p-8 text-center space-y-4">
-          <div className="inline-flex p-3.5 bg-orange-50 border border-orange-200 text-[#EB4F26]">
+          <div className="inline-flex p-3.5 bg-orange-50 border border-orange-200 text-[#F15A24]">
             <Clock className="w-8 h-8" />
           </div>
 
@@ -87,7 +87,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({ currentUser }) => {
               </div>
               <div>
                 <span className="text-gray-500">Закрепленный поток:</span>{' '}
-                <strong>Группа КИИ26-02/3Б (1 курс)</strong>
+                <strong>Группа КИ26-02/3Б (1 курс)</strong>
               </div>
             </div>
           </div>
@@ -107,7 +107,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({ currentUser }) => {
                 </div>
                 <div className="text-xl font-bold text-gray-900 mt-0.5 flex items-center gap-2">
                   <span>{currentGroup}</span>
-                  <span className="text-xs font-semibold px-2 py-0.5 bg-orange-50 text-[#EB4F26] border border-orange-200">
+                  <span className="text-xs font-semibold px-2 py-0.5 bg-orange-50 text-[#F15A24] border border-orange-200">
                     1 курс
                   </span>
                 </div>
@@ -126,7 +126,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({ currentUser }) => {
                     onClick={() => setWeekType('even')}
                     className={`px-3 py-1.5 font-medium transition-colors ${
                       weekType === 'even'
-                        ? 'bg-[#EB4F26] text-white font-bold'
+                        ? 'bg-[#F15A24] text-white font-bold'
                         : 'bg-white text-gray-700 hover:bg-gray-50'
                     }`}
                   >
@@ -137,7 +137,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({ currentUser }) => {
                     onClick={() => setWeekType('odd')}
                     className={`px-3 py-1.5 font-medium transition-colors border-l border-r border-gray-300 ${
                       weekType === 'odd'
-                        ? 'bg-[#EB4F26] text-white font-bold'
+                        ? 'bg-[#F15A24] text-white font-bold'
                         : 'bg-white text-gray-700 hover:bg-gray-50'
                     }`}
                   >
@@ -148,7 +148,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({ currentUser }) => {
                     onClick={() => setWeekType('all')}
                     className={`px-3 py-1.5 font-medium transition-colors ${
                       weekType === 'all'
-                        ? 'bg-[#EB4F26] text-white font-bold'
+                        ? 'bg-[#F15A24] text-white font-bold'
                         : 'bg-white text-gray-700 hover:bg-gray-50'
                     }`}
                   >
@@ -166,7 +166,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({ currentUser }) => {
                   onClick={() => setSelectedDay(day)}
                   className={`px-3.5 py-1.5 font-medium whitespace-nowrap transition-colors border ${
                     selectedDay === day
-                      ? 'border-[#EB4F26] bg-[#EB4F26] text-white font-bold'
+                      ? 'border-[#F15A24] bg-[#F15A24] text-white font-bold'
                       : 'border-gray-200 bg-gray-50 text-gray-700 hover:bg-gray-100'
                   }`}
                 >
@@ -197,7 +197,7 @@ export const ScheduleView: React.FC<ScheduleViewProps> = ({ currentUser }) => {
                     <span className="font-bold text-gray-900 block font-mono text-sm">
                       {lesson.timeSlot}
                     </span>
-                    <span className="text-[11px] font-semibold text-[#EB4F26] mt-0.5 block">
+                    <span className="text-[11px] font-semibold text-[#F15A24] mt-0.5 block">
                       {lesson.lessonNumber}-я лента
                     </span>
                   </div>

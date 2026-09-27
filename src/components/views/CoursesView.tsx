@@ -22,9 +22,9 @@ export const CoursesView: React.FC<CoursesViewProps> = ({ currentUser }) => {
     <div className="space-y-4">
       
       {/* Плашка «В разработке» по запросу пользователя */}
-      <div className="bg-white border-l-4 border-l-[#EB4F26] border border-gray-200 p-4">
+      <div className="bg-white border-l-4 border-l-[#F15A24] border border-gray-200 p-4">
         <div className="flex items-start gap-3">
-          <div className="p-2 bg-orange-50 text-[#EB4F26] shrink-0">
+          <div className="p-2 bg-orange-50 text-[#F15A24] shrink-0">
             <Clock className="w-5 h-5" />
           </div>
           <div className="flex-1">
@@ -60,7 +60,7 @@ export const CoursesView: React.FC<CoursesViewProps> = ({ currentUser }) => {
         {/* Панель фильтров: Все (кроме скрытых) | Найти | Упорядочить по названию курса */}
         <div className="flex flex-col sm:flex-row gap-2.5 text-xs">
           <div className="relative min-w-44">
-            <select className="w-full appearance-none px-3 py-1.5 bg-white border border-gray-300 pr-8 focus:border-[#EB4F26] focus:outline-none">
+            <select className="w-full appearance-none px-3 py-1.5 bg-white border border-gray-300 pr-8 focus:border-[#F15A24] focus:outline-none">
               <option>Все (кроме скрытых)</option>
               <option>В процессе</option>
               <option>Будущие</option>
@@ -75,7 +75,7 @@ export const CoursesView: React.FC<CoursesViewProps> = ({ currentUser }) => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Найти"
-              className="w-full px-3 py-1.5 bg-white border border-gray-300 focus:border-[#EB4F26] focus:outline-none"
+              className="w-full px-3 py-1.5 bg-white border border-gray-300 focus:border-[#F15A24] focus:outline-none"
             />
           </div>
 
@@ -83,7 +83,7 @@ export const CoursesView: React.FC<CoursesViewProps> = ({ currentUser }) => {
             <select 
               value={sortOption} 
               onChange={(e) => setSortOption(e.target.value)}
-              className="w-full appearance-none px-3 py-1.5 bg-white border border-gray-300 pr-8 focus:border-[#EB4F26] focus:outline-none"
+              className="w-full appearance-none px-3 py-1.5 bg-white border border-gray-300 pr-8 focus:border-[#F15A24] focus:outline-none"
             >
               <option value="name">Упорядочить по названию курса</option>
               <option value="last">Упорядочить по последнему входу</option>
