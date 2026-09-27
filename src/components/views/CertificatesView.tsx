@@ -8,8 +8,13 @@ interface CertificatesViewProps {
 }
 
 export const CertificatesView: React.FC<CertificatesViewProps> = ({ currentUser }) => {
-  const [certs, setCerts] = useState<CertificateRequest[]>(apiGateway.getCertificates());
-  const [title, setTitle] = useState('Справка об обучении в СФУ');
+  const isTeacher = currentUser.role === 'teacher';
+  const [certs, setCerts] = useState<CertificateRequest[]>(apiGateway.getCertificates(isTeacher));
+  const [title, setTitle] = useState(
+    isTeacher 
+      ? 'Справка с места работы (подтверждение должности преподавателя)'
+      : 'Справка об обучении в СФУ'
+  );
   const [destination, setDestination] = useState('По месту требования');
   const [withOfficialSeal, setWithOfficialSeal] = useState(true); // Выбор синей гербовой печати
   const [timingMode, setTimingMode] = useState<'regular' | 'urgent' | 'custom'>('regular'); // Срок готовности
@@ -31,9 +36,10 @@ export const CertificatesView: React.FC<CertificatesViewProps> = ({ currentUser 
       withOfficialSeal,
       urgency: timingMode === 'urgent' ? 'urgent' : 'regular',
       targetPickupTime: targetTimeFormatted,
+      isTeacher,
     });
 
-    setCerts(apiGateway.getCertificates());
+    setCerts(apiGateway.getCertificates(isTeacher));
     setIsOrdered(true);
     setTimeout(() => setIsOrdered(false), 3500);
   };
@@ -53,19 +59,25 @@ export const CertificatesView: React.FC<CertificatesViewProps> = ({ currentUser 
 
   return (
     <div className="space-y-4">
-      {/* Шапка ДЕКАНАТА */}
+      {/* Шапка ДЕКАНАТА / ОТДЕЛА КАДРОВ */}
       <div className="bg-white border border-gray-200 p-4">
         <div className="text-base font-bold text-gray-900 mb-1">
-          Заказ справок — Деканат ИКИТ
+          {isTeacher ? 'Заказ справок и кадровых документов — Управление персонала СФУ' : 'Заказ справок — Деканат ИКИТ'}
         </div>
         <p className="text-xs text-gray-500">
-          Выдачей и заверением справок занимается деканат института (каб. УЛК-218, ул. Академика Киренского, 26).
+          {isTeacher
+            ? 'Оформлением кадровых и финансовых документов для профессорско-преподавательского состава занимается Отдел кадров ППС (каб. УЛК-104, ул. Академика Киренского, 26).'
+            : 'Выдачей и заверением справок занимается деканат института (каб. УЛК-218, ул. Академика Киренского, 26).'}
         </p>
 
         {isOrdered && (
           <div className="mt-3 p-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center gap-2">
             <Check className="w-4 h-4 text-emerald-600 shrink-0" />
-            <span>Заявление успешно зарегистрировано в деканате института с указанным временем готовности!</span>
+            <span>
+              {isTeacher
+                ? 'Заявление успешно зарегистрировано в управлении персонала СФУ с указанным временем готовности!'
+                : 'Заявление успешно зарегистрировано в деканате института с указанным временем готовности!'}
+            </span>
           </div>
         )}
       </div>
@@ -75,24 +87,48 @@ export const CertificatesView: React.FC<CertificatesViewProps> = ({ currentUser 
         {/* Форма заказа с выбором гербовой печати и срока готовности */}
         <div className="lg:col-span-5 bg-white border border-gray-200 p-4">
           <div className="text-xs font-bold text-gray-800 mb-3 uppercase tracking-wider">
-            Заявление в деканат
+            {isTeacher ? 'Заявление в отдел кадров ППС' : 'Заявление в деканат'}
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-3.5">
             <div>
               <label className="block text-xs font-medium text-gray-700 mb-1">
-                Вид справки
+                Вид справки / документа
               </label>
-              <select
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-2.5 py-1.5 text-xs bg-white border border-gray-300 focus:border-[#EB4F26] focus:outline-none"
-              >
-                <option value="Справка об обучении в СФУ">Справка об обучении в СФУ</option>
-                <option value="Справка в военный комиссариат (Приложение №4)">Справка в военкомат (Приложение №4)</option>
-                <option value="Справка об оплате обучения для налогового вычета">Справка для налогового вычета (ФНС)</option>
-                <option value="Академическая выписка оценок">Академическая выписка оценок за все семестры</option>
-              </select>
+              {isTeacher ? (
+                <select
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className="w-full px-2.5 py-1.5 text-xs bg-white border border-gray-300 focus:border-[#EB4F26] focus:outline-none"
+                >
+                  <option value="Справка с места работы (подтверждение должности преподавателя)">
+                    Справка с места работы (подтверждение должности преподавателя)
+                  </option>
+                  <option value="Справка о доходах и суммах налога физического лица (2-НДФЛ)">
+                    Справка о доходах физического лица (форма 2-НДФЛ)
+                  </option>
+                  <option value="Копия трудовой книжки (заверенная отделом кадров СФУ)">
+                    Копия трудовой книжки (заверенная отделом кадров)
+                  </option>
+                  <option value="Справка о научно-педагогическом стаже работы">
+                    Справка о научно-педагогическом стаже работы
+                  </option>
+                  <option value="Служебная записка на командировку / повышение квалификации">
+                    Служебная записка на командировку / повышение квалификации
+                  </option>
+                </select>
+              ) : (
+                <select
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  className="w-full px-2.5 py-1.5 text-xs bg-white border border-gray-300 focus:border-[#EB4F26] focus:outline-none"
+                >
+                  <option value="Справка об обучении в СФУ">Справка об обучении в СФУ</option>
+                  <option value="Справка в военный комиссариат (Приложение №4)">Справка в военкомат (Приложение №4)</option>
+                  <option value="Справка об оплате обучения для налогового вычета">Справка для налогового вычета (ФНС)</option>
+                  <option value="Академическая выписка оценок">Академическая выписка оценок за все семестры</option>
+                </select>
+              )}
             </div>
 
             <div>
@@ -104,7 +140,7 @@ export const CertificatesView: React.FC<CertificatesViewProps> = ({ currentUser 
                 required
                 value={destination}
                 onChange={(e) => setDestination(e.target.value)}
-                placeholder="Например: Военкомат Октябрьского района"
+                placeholder={isTeacher ? "Например: В банк для оформления ипотеки" : "Например: Военкомат Октябрьского района"}
                 className="w-full px-2.5 py-1.5 text-xs bg-white border border-gray-300 focus:border-[#EB4F26] focus:outline-none"
               />
             </div>
@@ -190,7 +226,9 @@ export const CertificatesView: React.FC<CertificatesViewProps> = ({ currentUser 
                     className="w-full px-2.5 py-1.5 text-xs bg-white border border-gray-300 focus:border-[#EB4F26] focus:outline-none font-mono"
                   />
                   <div className="text-[10px] text-gray-500">
-                    Деканат подготовит и подпишет справку строго к указанному сроку.
+                    {isTeacher 
+                      ? 'Отдел кадров подготовит документ строго к указанному сроку.'
+                      : 'Деканат подготовит и подпишет справку строго к указанному сроку.'}
                   </div>
                 </div>
               )}
@@ -207,7 +245,7 @@ export const CertificatesView: React.FC<CertificatesViewProps> = ({ currentUser 
               className="w-full py-2 text-xs font-semibold bg-[#EB4F26] hover:bg-[#d63f17] text-white flex items-center justify-center gap-1.5 transition-colors"
             >
               <Plus className="w-3.5 h-3.5" />
-              <span>Подать заявку в деканат</span>
+              <span>{isTeacher ? 'Подать заявку в отдел кадров' : 'Подать заявку в деканат'}</span>
             </button>
           </form>
         </div>
@@ -215,7 +253,7 @@ export const CertificatesView: React.FC<CertificatesViewProps> = ({ currentUser 
         {/* Список текущих справок */}
         <div className="lg:col-span-7 bg-white border border-gray-200 p-4">
           <div className="text-xs font-bold text-gray-800 mb-3 uppercase tracking-wider">
-            Журнал заявлений в деканат ({certs.length})
+            {isTeacher ? 'Журнал кадровых документов' : 'Журнал заявлений в деканат'} ({certs.length})
           </div>
 
           <div className="divide-y divide-gray-100">

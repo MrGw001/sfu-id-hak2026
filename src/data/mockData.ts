@@ -822,6 +822,31 @@ export const MOCK_CERTIFICATES: CertificateRequest[] = [
   },
 ];
 
+export const MOCK_TEACHER_CERTIFICATES: CertificateRequest[] = [
+  {
+    id: 't-101',
+    title: 'Справка с места работы (подтверждение должности преподавателя)',
+    destination: 'По месту требования (Банк / Консульство)',
+    requestedAt: '24.09.2026 10:15',
+    withOfficialSeal: true,
+    urgency: 'regular',
+    readyTimeEst: '27.09.2026 к 14:00 (3 рабочих дня)',
+    status: 'Подписана начальником УП',
+    pickupOffice: 'Отдел кадров ППС (каб. УЛК-104, ул. Киренского, 26)',
+  },
+  {
+    id: 't-102',
+    title: 'Справка о доходах и суммах налога физического лица (2-НДФЛ)',
+    destination: 'В банк (для оформления кредита / ипотеки)',
+    requestedAt: '25.09.2026 14:30',
+    withOfficialSeal: true,
+    urgency: 'urgent',
+    readyTimeEst: '26.09.2026 к 16:00 (срочно, 1 рабочий день)',
+    status: 'Готова к выдаче (каб. УЛК-104)',
+    pickupOffice: 'Управление бухгалтерского учета и отчетности СФУ',
+  },
+];
+
 export const MOCK_ACADEMIC_PLAN: AcademicPlanItem[] = [
   { id: '1', semester: 1, discipline: 'Аналитическая геометрия', hoursTotal: 108, credits: 3, controlType: 'Экзамен', grade: 'Отлично', points: 95 },
   { id: '2', semester: 1, discipline: 'Математический анализ', hoursTotal: 144, credits: 4, controlType: 'Экзамен', grade: 'Отлично', points: 92 },

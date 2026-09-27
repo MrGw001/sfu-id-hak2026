@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 import { apiGateway } from '../../services/apiGateway';
-import { MoodleCourse } from '../../types';
-import { Search, MoreVertical, ChevronDown } from 'lucide-react';
+import { MoodleCourse, UserProfile } from '../../types';
+import { Search, MoreVertical, ChevronDown, Clock, AlertTriangle } from 'lucide-react';
 
-export const CoursesView: React.FC = () => {
+interface CoursesViewProps {
+  currentUser?: UserProfile;
+}
+
+export const CoursesView: React.FC<CoursesViewProps> = ({ currentUser }) => {
   const [courses] = useState<MoodleCourse[]>(apiGateway.getMoodleCourses());
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOption, setSortOption] = useState('name');
+  const isTeacher = currentUser?.role === 'teacher';
 
   const filtered = courses.filter(c => 
     c.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -16,6 +21,36 @@ export const CoursesView: React.FC = () => {
   return (
     <div className="space-y-4">
       
+      {/* Плашка «В разработке» по запросу пользователя */}
+      <div className="bg-white border-l-4 border-l-[#EB4F26] border border-gray-200 p-4">
+        <div className="flex items-start gap-3">
+          <div className="p-2 bg-orange-50 text-[#EB4F26] shrink-0">
+            <Clock className="w-5 h-5" />
+          </div>
+          <div className="flex-1">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="font-bold text-gray-900 text-sm">
+                Электронные курсы eКурсы СФУ (e.sfu-kras.ru)
+              </span>
+              <span className="bg-amber-100 text-amber-900 border border-amber-300 text-[10px] font-bold px-2 py-0.5 uppercase tracking-wider">
+                В разработке
+              </span>
+            </div>
+            <p className="text-xs text-gray-500 mt-1 leading-relaxed">
+              {isTeacher ? (
+                <>
+                  Уважаемый преподаватель! Интерактивный модуль управления курсами, тестирования и выставления баллов через LMS Moodle 4.x находится в стадии разработки. Для занесения баллов БРС используйте вкладку <strong>«Ведомость оценивания»</strong>.
+                </>
+              ) : (
+                <>
+                  Интеграционный шлюз с порталом eКурсы СФУ (LMS Moodle 4.x) находится на стадии разработки и планового тестирования. Ниже доступен каталог закрепленных учебных дисциплин.
+                </>
+              )}
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Шапка в стиле Moodle e.sfu-kras.ru (по скриншоту пользователя) */}
       <div className="bg-white border border-gray-200 p-4">
         <div className="text-base font-bold text-gray-900 mb-3">

@@ -18,6 +18,7 @@ import {
   MOCK_TEACHER_GRADES, 
   ALL_USPORT_SPECIALIZATIONS, 
   MOCK_CERTIFICATES, 
+  MOCK_TEACHER_CERTIFICATES,
   MOCK_ACADEMIC_PLAN 
 } from '../data/mockData';
 
@@ -26,6 +27,7 @@ class SfuApiGatewayService {
   private attendance: AttendanceRecord[] = [...MOCK_ATTENDANCE];
   private teacherGrades: TeacherGradeEntry[] = [...MOCK_TEACHER_GRADES];
   private certificates: CertificateRequest[] = [...MOCK_CERTIFICATES];
+  private teacherCertificates: CertificateRequest[] = [...MOCK_TEACHER_CERTIFICATES];
   private moodleCourses: MoodleCourse[] = [...MOCK_MOODLE_COURSES];
   private sportSections: SportSection[] = [...ALL_USPORT_SPECIALIZATIONS];
 
@@ -144,9 +146,9 @@ class SfuApiGatewayService {
     return this.sportSections;
   }
 
-  // --- Заказ справок в ДЕКАНАТЕ с выбором гербовой печати и расчетом времени ---
-  getCertificates(): CertificateRequest[] {
-    return this.certificates;
+  // --- Заказ справок (Деканат для студентов / Отдел кадров для преподавателей) ---
+  getCertificates(isTeacher: boolean = false): CertificateRequest[] {
+    return isTeacher ? this.teacherCertificates : this.certificates;
   }
 
   orderCertificate(params: {
@@ -155,6 +157,7 @@ class SfuApiGatewayService {
     withOfficialSeal: boolean;
     urgency: 'regular' | 'urgent';
     targetPickupTime?: string;
+    isTeacher?: boolean;
   }): CertificateRequest {
     const now = new Date();
     // Расчет точного срока готовности
@@ -171,6 +174,8 @@ class SfuApiGatewayService {
       readyDesc = `${readyDate.toLocaleDateString('ru-RU')} к 14:00 (стандартный срок, 3 рабочих дня)`;
     }
 
+    const isTeacher = Boolean(params.isTeacher);
+
     const newCert: CertificateRequest = {
       id: String(Date.now()).slice(-4),
       title: params.title,
@@ -180,11 +185,17 @@ class SfuApiGatewayService {
       urgency: params.urgency,
       readyTimeEst: readyDesc,
       targetPickupTime: params.targetPickupTime,
-      status: 'На рассмотрении в деканате',
-      pickupOffice: 'Деканат ИКИТ (каб. УЛК-218, ул. Киренского, 26)',
+      status: isTeacher ? 'В обработке (Отдел кадров)' : 'На рассмотрении в деканате',
+      pickupOffice: isTeacher 
+        ? 'Отдел кадров ППС (каб. УЛК-104, ул. Киренского, 26)'
+        : 'Деканат ИКИТ (каб. УЛК-218, ул. Киренского, 26)',
     };
 
-    this.certificates = [newCert, ...this.certificates];
+    if (isTeacher) {
+      this.teacherCertificates = [newCert, ...this.teacherCertificates];
+    } else {
+      this.certificates = [newCert, ...this.certificates];
+    }
     return newCert;
   }
 

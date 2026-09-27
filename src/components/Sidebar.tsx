@@ -21,15 +21,18 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onSelectTab,
   currentUser,
 }) => {
-  const navItems = [
-    { id: 'schedule', name: 'Расписание занятий', icon: Calendar },
+  const isTeacher = currentUser.role === 'teacher';
+  const isHeadman = currentUser.role === 'headman';
+
+  let navItems = [
+    { id: 'schedule', name: isTeacher ? 'Расписание преподавателя' : 'Расписание занятий', icon: Calendar },
     { id: 'courses', name: 'Электронные курсы (e.sfu)', icon: BookOpen },
     { id: 'sport', name: 'Запись на спорт', icon: Dumbbell },
-    { id: 'certificates', name: 'Заказ справок (Деканат)', icon: FileText },
+    { id: 'certificates', name: isTeacher ? 'Заказ справок (Отдел кадров)' : 'Заказ справок (Деканат)', icon: FileText },
     { id: 'academic_plan', name: 'Зачетная книжка', icon: Award },
   ];
 
-  if (currentUser.role === 'headman') {
+  if (isHeadman) {
     navItems.splice(1, 0, {
       id: 'headman_journal',
       name: 'Журнал посещаемости',
@@ -37,18 +40,20 @@ export const Sidebar: React.FC<SidebarProps> = ({
     });
   }
 
-  if (currentUser.role === 'teacher') {
-    navItems.splice(1, 0, {
-      id: 'teacher_grades',
-      name: 'Ведомость оценивания',
-      icon: GraduationCap,
-    });
+  if (isTeacher) {
+    // Для преподавателя: убираем запись на спорт и зачетную книжку, добавляем ведомость
+    navItems = [
+      { id: 'schedule', name: 'Расписание преподавателя', icon: Calendar },
+      { id: 'teacher_grades', name: 'Ведомость оценивания', icon: GraduationCap },
+      { id: 'courses', name: 'Электронные курсы (e.sfu)', icon: BookOpen },
+      { id: 'certificates', name: 'Заказ справок (Отдел кадров)', icon: FileText },
+    ];
   }
 
   return (
     <aside className="w-full md:w-56 shrink-0 space-y-3">
       
-      {/* Профиль студента */}
+      {/* Профиль студента / преподавателя */}
       <div className="bg-white border border-gray-200 p-3 text-xs">
         <div className="font-bold text-gray-900 leading-tight">
           {currentUser.fullName}
@@ -59,7 +64,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
           {currentUser.role === 'teacher' && 'Преподаватель ИКИТ СФУ'}
         </div>
         <div className="text-[11px] text-gray-700 mt-1.5 font-mono">
-          Билет: <strong>{currentUser.studentCardNumber}</strong>
+          {isTeacher ? (
+            <>Табельный №: <strong>{currentUser.studentCardNumber}</strong></>
+          ) : (
+            <>Билет: <strong>{currentUser.studentCardNumber}</strong></>
+          )}
         </div>
       </div>
 

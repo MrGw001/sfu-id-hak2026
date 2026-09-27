@@ -63,10 +63,10 @@ export default function App() {
             )}
 
             {currentTab === 'courses' && (
-              <CoursesView />
+              <CoursesView currentUser={currentUser} />
             )}
 
-            {currentTab === 'sport' && (
+            {currentTab === 'sport' && currentUser.role !== 'teacher' && (
               <SportView currentUser={currentUser} />
             )}
 
@@ -74,7 +74,7 @@ export default function App() {
               <CertificatesView currentUser={currentUser} />
             )}
 
-            {currentTab === 'academic_plan' && (
+            {currentTab === 'academic_plan' && currentUser.role !== 'teacher' && (
               <AcademicPlanView currentUser={currentUser} />
             )}
           </main>
